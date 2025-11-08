@@ -1,7 +1,14 @@
 #include <bits/stdc++.h>
+#include <iostream>
+/*
+Encapsulation is the act of bundling (data + methods in a class) and hiding (using private, protected access specifiers). It's the mechanism.
+
+Abstraction is the result or the concept. It's the simplified view you get by focusing only on what's important and ignoring the hidden details.
+*/
 
 class MyClass
 {
+
 public:
     std::string name;
 
@@ -38,6 +45,13 @@ public:
     {
         std::cout << "MyClass object name: " << name << std::endl;
     }
+
+private:
+    friend std::ostream &operator<<(std::ostream &o, const MyClass &obj)
+    {
+        o << "printing ostream overload " << obj.name << "\n";
+        return o;
+    }
 };
 
 // --- Scenarios where Copy Constructor is Called ---
@@ -66,7 +80,8 @@ int main()
     // MyClass car1 =MyClass(); // will iterprete Car() as a function
     // Object Initialization (Copy-Initialization)
     std::cout << "\n--- Scenario: Object Initialization (Copy-Initialization) ---" << std::endl;
-    MyClass original("Original");             // Constructor
+    MyClass original("Original"); // Constructor
+    std::cout << original;
     MyClass copy_init_obj = original;         // Copy Constructor called (copying 'original')
     MyClass moveObject = std::move(original); // move constructor is called
     copy_init_obj.display();
